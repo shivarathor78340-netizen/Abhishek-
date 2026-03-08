@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pizza Hub - Shahabad</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        /* --- CSS Variables & Reset --- */
+        :root {
+            --primary-color: #e74c3c; /* Pizza Red */
+            --secondary-color: #f1c40f; /* Cheese Yellow */
+            --dark-color: #2c3e50;
+            --light-color: #f9f9f9;
+            --text-color: #333;
+            --white: #ffffff;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-color);
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { max-width: 100%; display: block; }
+
+        /* --- Header & Navigation --- */
+        header {
+            background: var(--white);
+            box-shadow: var(--shadow);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .logo span { color: var(--secondary-color); }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--primary-color); }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            font-size: 1.5rem;
+        }
+
+        /* --- Hero Section --- */
+        #home {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+            padding: 0 20px;
+            margin-top: 60px; /* Offset fixed header */
+        }
+
+        #home h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        #home p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 0 10px;
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary-color);
+            color: var(--dark-color);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* --- Section Styling --- */
+        section {
+            padding: 4rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark-color);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: var(--primary-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        /* --- Menu Section --- */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-card {
+            background: var(--white);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .menu-card:hover { transform: translateY(-5px); }
+
+        .menu-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .menu-info { padding: 1.5rem; }
+
+        .menu-info h3 {
+            color: var(--dark-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-info p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        /* --- About Section --- */
+        #about {
+            background-color: var(--white);
+            text-align: center;
+        }
+        
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* --- Location & Contact --- */
+        .contact-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+
+        .contact-info, .map-container {
+            flex: 1;
+            min-width: 300px;
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .info-item i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-right: 1rem;
+            width: 30px;
+        }
+
+        .info-item h4 { margin-bottom: 5px; }
+
+        iframe {
+            width: 100%;
+            height: 350px;
+            border: 0;
+            border-radius: 10px;
+        }
+
+        /* --- Footer --- */
+        footer {
+            background: var(--dark-color);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* --- Responsive Design --- */
+        @media (max-width: 768px) {
+            .navbar { padding: 1rem; }
+            
+            .hamburger { display: block; }
+
+            .nav-links {
+                position: absolute;
+                top: 70px;
+                right: 0;
+                width: 100%;
+                background: var(--white);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                display: none; /* Hidden by default on mobile */
+            }
+
+            .nav-links.active { display: flex; }
+
+            #home h1 { font-size: 2.5rem; }
+            
+            .btn { width: 100%; margin: 10px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">Pizza <span>Hub</span></a>
+            <div class="hamburger" id="hamburger">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#location">Location</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Home Section -->
+    <section id="home">
+        <h1>Fresh & Delicious Pizza in Shahabad</h1>
+        <p>Hand-tossed, loaded with love, and baked to perfection. Experience the best taste in town.</p>
+        <div>
+            <a href="#menu" class="btn btn-primary">Order Now</a>
+            <a href="#contact" class="btn btn-secondary"><i class="fas fa-phone"></i> Call Now</a>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu">
+        <h2 class="section-title">Our Popular Pizzas</h2>
+        <div class="menu-grid">
+            <!-- Item 1 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Margherita" class="menu-img">
+                <div class="menu-info">
+                    <h3>Classic Margherita</h3>
+                    <p>Fresh mozzarella, basil, and tomato sauce.</p>
+                    <span class="price">₹199</span>
+                    <a href="#contact" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">Order</a>
+                </div>
+            </div>
+            <!-- Item 2 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Farmhouse" class="menu-img">
+                <div class="menu-info">
+                    <h3>Farmhouse</h3>
+                    <p>Onions, capsicum, tomatoes, and extra cheese.</p>
+                    <span class="price">₹249</span>
+                    <a href="#contact" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">Order</a>
+                </div>
+            </div>
+            <!-- Item 3 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Veg Loaded" class="menu-img">
+                <div class="menu-info">
+                    <h3>Veg Loaded</h3>
+                    <p>Loaded with double cheese and fresh veggies.</p>
+                    <span class="price">₹299</span>
+                    <a href="#contact" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">Order</a>
+                </div>
+            </div>
+            <!-- Item 4 -->
+            <div class="menu-card">
+                <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Cheese Burst" class="menu-img">
+                <div class="menu-info">
+                    <h3>Cheese Burst</h3>
+                    <p>Triple cheese explosion with a crispy crust.</p>
+                    <span class="price">₹349</span>
+                    <a href="#contact" class="btn btn-primary" style="padding: 8px 20px; font-size: 0.9rem;">Order</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">About Pizza Hub</h2>
+        <div class="about-content">
+            <p>Welcome to <strong>Pizza Hub</strong>, Shahabad's favorite local pizza spot! We believe in serving fresh, hot, and delicious pizzas made with the finest ingredients. Whether you are craving a classic Margherita or a loaded Veggie delight, our friendly team is here to serve you with a smile. We are dedicated to bringing the best fast-food experience to our community.</p>
+        </div>
+    </section>
+
+    <!-- Location & Contact Section -->
+    <section id="location">
+        <h2 class="section-title">Find Us</h2>
+        <div class="contact-container">
+            <!-- Contact Info -->
+            <div class="contact-info" id="contact">
+                <h3>Contact Details</h3>
+                <br>
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <div>
+                        <h4>Address</h4>
+                        <p>JWRP+PMM, Shahabad, Uttar Pradesh 241124<br>Near BOI ATM</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-clock"></i>
+                    <div>
+                        <h4>Opening Hours</h4>
+                        <p>Open Daily: 10:00 AM – 10:00 PM</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <i class="fas fa-phone-alt"></i>
+                    <div>
+                        <h4>Call Us</h4>
+                        <p>+91 98765 43210</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Google Map -->
+            <div class="map-container">
+                <!-- Embedding map for Shahabad, UP based on Plus Code -->
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3536.6666666666665!2d78.0!3d27.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjfCsDAwJzAwLjAiTiA3OMKwMDAnMDAuMCJF!5e0!3m2!1sen!2sin!4v1600000000000!5m2!1sen!2sin" allowfullscreen="" loading="lazy"></iframe>
+                <!-- Note: The coordinates above are approximate for Shahabad. For exact precision, a specific API key or exact coordinate search is usually required, but this
